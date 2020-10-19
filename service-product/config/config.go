@@ -1,7 +1,8 @@
 package config
 
-//Config is struct type, which [Port as string, Database as Database]
+//Config is struct type, which [Port as string, AuthService as AuthService, Database as Database]
 type Config struct {
-	Port     string
-	Database Database
+	Port        string
+	AuthService AuthService `mapstructure:"auth_service"`
+	Database    Database
 }

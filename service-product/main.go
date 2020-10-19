@@ -24,8 +24,13 @@ func main() {
 	db, err := initDB(cfg.Database)
 
 	router := mux.NewRouter()
+
+	authMiddleware := handler.AuthMiddleware{
+		AuthService: cfg.AuthService,
+	}
+
 	menuHandler := handler.Menu{Db: db}
-	router.Handle("/add-menu", http.HandlerFunc(menuHandler.AddMenu))
+	router.Handle("/add-menu", authMiddleware.ValidateAuth(http.HandlerFunc(menuHandler.AddMenu)))
 	router.Handle("/menu", http.HandlerFunc(menuHandler.GetAllMenu))
 
 	fmt.Printf("Server listen on :%s", cfg.Port)
