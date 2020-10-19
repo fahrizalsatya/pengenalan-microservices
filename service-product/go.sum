@@ -1,2 +1,4 @@
+github.com/FahrizalSatya/pengenalan-microservices v0.0.0-20201019131131-29310e0cdd45 h1:yayvyI2CkB00tA6Ld2eNm+jU2MLshlRkowRuSEzry6U=
+github.com/FahrizalSatya/pengenalan-microservices v0.0.0-20201019131131-29310e0cdd45/go.mod h1:g1ZcwzXcCUf4pr+h6P0U18pzW78ETABPB+0vq4WOgjQ=
 github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=
 github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
