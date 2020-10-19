@@ -40,3 +40,19 @@ func (menu *Menu) AddMenu(w http.ResponseWriter, r *http.Request) {
 	}
 	utils.WrapAPISuccess(w, r, "success", 200)
 }
+
+//GetAllMenu handle get all
+func (menu *Menu) GetAllMenu(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		utils.WrapAPIError(w, r, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+		return
+	}
+	menuDb := database.Menu{}
+
+	menus, err := menuDb.GetAll(menu.Db)
+	if err != nil {
+		utils.WrapAPIError(w, r, "failed get menu:"+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	utils.WrapAPIData(w, r, menus, 200, "success")
+}
