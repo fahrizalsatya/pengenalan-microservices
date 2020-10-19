@@ -1,6 +1,7 @@
 package config
 
-//Config is struct type, which Port as string
+//Config is struct type, which [Port as string, Database as Database]
 type Config struct {
-	Port string
+	Port     string
+	Database Database
 }

@@ -6,6 +6,8 @@ import (
 	"net/http"
 
 	"github.com/spf13/viper"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 
 	"github.com/FahrizalSatya/pengenalan-microservices/service-product/config"
 	"github.com/FahrizalSatya/pengenalan-microservices/service-product/handler"
@@ -18,6 +20,8 @@ func main() {
 		log.Panic(err)
 		return
 	}
+
+	db, err := initDB(cfg.Database)
 
 	router := mux.NewRouter()
 	router.Handle("/add-product", http.HandlerFunc(handler.AddMenuHandler))
@@ -41,4 +45,13 @@ func getConfig() (config.Config, error) {
 		return config.Config{}, err
 	}
 	return cfg, nil
+}
+
+func initDB(dbConfig config.Database) (*gorm.DB, error) {
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?%s", dbConfig.User, dbConfig.Password, dbConfig.Host, dbConfig.Port, dbConfig.Config)
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
+		return nil, err
+	}
+	return db, nil
 }
